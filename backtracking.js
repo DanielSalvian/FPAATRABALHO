@@ -1,8 +1,7 @@
-// Linha de entrada com X conjunto de dados
+// Linha de entrada pra vetores com X dados
 function quant(lines) {
   return parseInt(lines[0], 10);
 }
-
 
 function matriz(a, b) {
   const n = a.length;
@@ -19,64 +18,32 @@ function matriz(a, b) {
       }
     }
   }
-
-  const memo = new Map();
-
-  function backtrack(i, j) {
-    const key = `${i},${j}`;
-    if (memo.has(key)) return memo.get(key);
-
-    if (i === 0 || j === 0) return new Set([""]);
-
-    const result = new Set();
-
-    if (a[i - 1] === b[j - 1]) {
-      for (const s of backtrack(i - 1, j - 1)) {
-        result.add(s + a[i - 1]);
-      }
-    } else {
-      if (dp[i - 1][j] >= dp[i][j - 1]) {
-        for (const s of backtrack(i - 1, j)) result.add(s);
-      }
-      if (dp[i][j - 1] >= dp[i - 1][j]) {
-        for (const s of backtrack(i, j - 1)) result.add(s);
-      }
-    }
-
-    memo.set(key, result);
-    return result;
-  }
-
-  const result = Array.from(backtrack(n, m));
-  result.sort();
-  return result;
+ //Tava uma função não funcional de backtracking q testei da internet, que a matriz com os valores tá montado
+  return dp.map(row => row.join(' '));
 }
 
 function imprimir(input) {
   const lines = input.trim().split('\n');
   let index = 0;
-  const D = quant(lines); 
-  index++; 
+  const D = quant(lines);
+  index++;
   const results = [];
 
   for (let d = 0; d < D; d++) {
-    const a = lines[index++].trim(); //Helena
-    const b = lines[index++].trim(); //Marcos
+    const a = lines[index++].trim(); // Helena
+    const b = lines[index++].trim(); // Marcos
 
-    const subsequences = matriz(a, b);
-    results.push(subsequences.join('\n'));
+    const matrizFormatada = matriz(a, b);
+    results.push(matrizFormatada.join('\n'));
   }
 
   return results.join('\n\n');
 }
 
-
-//Exemlo
-const input = `2
-fsdokfdksfsd
-fsdokfdksfsd
-fsdd`;
-
+// Exemplo de teste direto:
+const input = `1
+abcbdab
+bdcaba`;
 console.log(imprimir(input));
 
 function executar() {
