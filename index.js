@@ -82,7 +82,7 @@ window.addEventListener("click", (event) => {
 // Função que será chamada quando o botão "Enviar" for clicado
 function enviarTexto() {
     const texto = document.getElementById("inputTexto").value;
-    const modal = document.getElementById("modalTexto"); // se ainda não tiver isso no escopo
+    const modal = document.getElementById("modalTexto");
 
     const tamanhoEntrada = document.getElementById("tamanhoEntrada");
 
@@ -95,25 +95,30 @@ function enviarTexto() {
     const primeiraLinha = parseInt(linhas[0].trim(), 10);
 
     if (primeiraLinha < 1 || primeiraLinha > 10) {
-        //tamanhoEntrada
         alert(`Tamanho invalido`);
         return;
     }
 
-    tamanhoEntrada.value = primeiraLinha;  // Setar o select para o valor da primeira linha
+    tamanhoEntrada.value = primeiraLinha;
+    let tamanhoIdeal = tamanhoEntrada.value * 2 + 1;
+
+    if (linhas.length > tamanhoIdeal || linhas.length < tamanhoIdeal) {
+        alert(`As entradas fornecidas não batem com as regras`);
+        return;
+    }
+
+
+
     gerarCampos();
 
-    if (linhas.length >= tamanhoEntrada.value * 2+1) {
-        let campoHelena;
-        let campoMarcus;
+    let campoHelena;
+    let campoMarcus;
 
-        for (let i = 0; i < tamanhoEntrada.value; i++) {
-            campoHelena = document.getElementById(`Helena_${i+1}`);
-            campoMarcus = document.getElementById(`Marcus_${i+1}`);
-            if (campoHelena) campoHelena.value = linhas[1 + i * 2];
+    for (let i = 0; i < tamanhoEntrada.value; i++) {
+        campoHelena = document.getElementById(`Helena_${i + 1}`);
+        campoMarcus = document.getElementById(`Marcus_${i + 1}`);
+        if (campoHelena) campoHelena.value = linhas[1 + i * 2];
         if (campoMarcus) campoMarcus.value = linhas[2 + i * 2];
-        }
-
     }
 
 
