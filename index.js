@@ -108,7 +108,6 @@ function enviarTexto() {
     }
 
 
-
     gerarCampos();
 
     let campoHelena;
@@ -120,8 +119,6 @@ function enviarTexto() {
         if (campoHelena) campoHelena.value = linhas[1 + i * 2];
         if (campoMarcus) campoMarcus.value = linhas[2 + i * 2];
     }
-
-
 
     modal.style.display = "none";
 }

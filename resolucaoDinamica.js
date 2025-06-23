@@ -11,6 +11,7 @@ function gerenciarEntradas(tamanhoEntrada, helena, marcus) {
     return resposta;
 }
 
+//monta/avalia a matriz enquanto isso já vai formando a substrings
 function avaliarMatriz(stringX, stringY) {
     const tamX = stringX.length;
     const tamY = stringY.length;

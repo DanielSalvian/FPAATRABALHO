@@ -44,7 +44,7 @@ function imprimir(input) {
 const input = `1
 abcbdab
 bdcaba`;
-console.log(imprimir(input));
+//console.log(imprimir(input)); comentado para não ficar aparecendo no console
 
 function executar() {
   const input = document.getElementById('inputText').value.trim();
