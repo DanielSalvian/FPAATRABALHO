@@ -4,17 +4,11 @@ class Elemento {
         this.valor = _valor;
     }
 }
-//Direções
-// 0 1 2
-// 3 4 5
-// 6 7 8
-//Valor
-// Sua posição na sequencia 1, 2, 3 .....
-
 //valores teste professora
 //ijkijkii
 //ikjikji
 
+//Funções de resolução intermediaria
 function gerenciarEntradas(tamanhoEntrada, helena, marcus) {
     let matriz = [];
     let resposta = [];
@@ -23,6 +17,7 @@ function gerenciarEntradas(tamanhoEntrada, helena, marcus) {
         matriz = instanciarMariz(helena[i].length, marcus[i].length);
         matriz = avaliarMatriz(matriz, helena[i], marcus[i])
         resposta.push(...gerarSubstringDaMatriz(matriz, helena[i], marcus[i]).sort());
+        resposta.push(..."#");
     }
     return resposta;
 }
@@ -70,6 +65,7 @@ function avaliarMatriz(matriz, stringX, stringY) {
     return matriz;
 
 }
+
 
 //verificar
 function gerarSubstringDaMatriz(matriz, stringX, stringY) {
@@ -123,6 +119,8 @@ function gerarSubstringDaMatriz(matriz, stringX, stringY) {
     return [...resultados];
 }
 
+
+//Função para pegar entradas
 function pegarDadosEntradaHelena() {
     const quantidade = parseInt(document.getElementById('tamanhoEntrada').value);
     const helena = [];
@@ -165,6 +163,7 @@ function pegarDadosEntradaMarcus() {
     return marcus;
 }
 
+//Funções de resolução
 function analisarSembacktracking() {
     let helena = pegarDadosEntradaHelena();
     let marcus;
@@ -187,19 +186,27 @@ function analisarSembacktracking() {
             const lista = document.createElement("ul");
 
             for (let count = 0; count < resposta.length; count++) {
-                if (count === 1000) {
-                    alert("O limite de 1000 foi atingido, as respostas acima de 1000 foram ocultadas");
-                    break;
+                if (resposta[count] != "#") {
+                    if (count === 1000) {
+                        alert("O limite de 1000 foi atingido, as respostas acima de 1000 foram ocultadas");
+                        break;
+                    }
+                    const item = document.createElement("li");
+                    item.textContent = resposta[count];
+                    lista.appendChild(item);
                 }
-                const item = document.createElement("li");
-                item.textContent = resposta[count];
-                lista.appendChild(item);
+                else {
+                    const br = document.createElement('br');
+                    lista.appendChild(br);
+                }
+
             }
 
             campoResultado.appendChild(lista);
+
         }
 
-        console.log(resposta);
+        //console.log(resposta);
     }
 
 }

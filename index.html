@@ -4,24 +4,63 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
     <title>Teste de Substring</title>
 </head>
 
 <body>
 
-    <p>Selecione o tamanho da entrada:</p>
-    <select id="tamanhoEntrada">
-        <!-- JavaScript irá preencher aqui -->
-    </select>
+    <head>
 
-    <br></br>
-    <div id="camposGerados"></div>
-    <br></br>
+    </head>
 
-    <button onclick="analisarSembacktracking()">Testar</button>
+    <main>
 
-    <p>Substrings comuns:</p>
-    <div id="resultado"></div>
+        <p class="p-title">Selecione o modo de execução:</p>
+
+        <div class="d-flex">
+            <p2>Dinâmico</p2>
+            <div class="checkbox">
+                <input class="yep" id="check" type="checkbox">
+                <label for="check"></label>
+            </div>
+            <p2>Backtracking</p2>
+        </div>
+
+        <br>
+        <button class="add-button"><img src="add.png" class="es-1">Inserir por texto</button>
+        <br><br>
+
+        <p>Selecione o tamanho da entrada:</p>
+        <select id="tamanhoEntrada">
+            <!-- JavaScript irá preencher aqui -->
+        </select>
+
+        <br></br>
+        <div id="camposGerados"></div>
+        <br></br>
+
+        <button onclick="definirAnalise()" class="check-button">Gerar Substrings</button>
+
+        <br></br>
+        <p>Substrings comuns:</p>
+        <div id="resultado"></div>
+
+        <!-- Modal -->
+        <div id="modalTexto" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Insira o texto abaixo:</h2>
+                <textarea id="inputTexto" rows="10" cols="50" placeholder="Digite aqui..."></textarea>
+                <br />
+                <button onclick="enviarTexto()">Enviar</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
 
     <script src="index.js"></script>
     <script src="resolucaoDinamica.js"></script>
