@@ -1,127 +1,55 @@
-class Elemento {
-    constructor(_direcao, _valor) {
-        this.direcao = _direcao;
-        this.valor = _valor;
-    }
-}
-//valores teste professora
-//1
-//ijkijkii
-//ikjikji
-
-//Funções de resolução intermediaria
+//gerencia as entradas para preparalas para o processo
 function gerenciarEntradas(tamanhoEntrada, helena, marcus) {
-    let matriz = [];
     let resposta = [];
 
     for (let i = 0; i < tamanhoEntrada; i++) {
-        matriz = instanciarMariz(helena[i].length, marcus[i].length);
-        matriz = avaliarMatriz(matriz, helena[i], marcus[i])
-        resposta.push(...gerarSubstringDaMatriz(matriz, helena[i], marcus[i]).sort());
-        resposta.push(..."#");
+          let sequencias = avaliarMatriz(helena[i], marcus[i]);
+          let arrSequencias = Array.from(sequencias).filter(s => s !== '').sort();
+          resposta.push(...arrSequencias);
+          resposta.push("#");
     }
     return resposta;
 }
 
-function instanciarMariz(tamX, tamY) {
-    let matriz = [];
+function avaliarMatriz(stringX, stringY) {
+    const tamX = stringX.length;
+    const tamY = stringY.length;
 
-    for (let i = 0; i < tamX; i++) {
-        matriz[i] = [];
-        for (let j = 0; j < tamY; j++) {
-            matriz[i][j] = new Elemento(4, 0);
-        }
-    }
+    const dpLen = Array.from({ length: tamX + 1 }, () => new Uint16Array(tamY + 1));
+    const dpSeq = Array.from({ length: tamX + 1 }, () =>
+        Array.from({ length: tamY + 1 }, () => new Set(['']))
+    );
 
-    return matriz;
-}
-
-function avaliarMatriz(matriz, stringX, stringY) {
-    let tamX = stringX.length;
-    let tamY = stringY.length;
-
-    for (let i = 0; i < tamX; i++) {
-        for (let j = 0; j < tamY; j++) {
-            if (stringX[i] === stringY[j]) {
-                let valorDiagonal = (i > 0 && j > 0) ? matriz[i - 1][j - 1].valor : 0;
-                matriz[i][j].valor = valorDiagonal + 1;
-                matriz[i][j].direcao = 0; // diagonal (↖)
-            }
-            else {
-                // Cima ou Esquerda — pegar o maior
-                let cima = i > 0 ? matriz[i - 1][j].valor : 0;
-                let esquerda = j > 0 ? matriz[i][j - 1].valor : 0;
-
-                if (cima >= esquerda) {
-                    matriz[i][j].valor = cima;
-                    matriz[i][j].direcao = 1; // cima
+    for (let i = 1; i <= tamX; i++) {
+        for (let j = 1; j <= tamY; j++) {
+            if (stringX[i - 1] === stringY[j - 1]) {
+                dpLen[i][j] = dpLen[i - 1][j - 1] + 1;
+                dpSeq[i][j] = new Set();
+                for (const seq of dpSeq[i - 1][j - 1]) {
+                    dpSeq[i][j].add(seq + stringX[i - 1]);
+                }
+            } else {
+                if (dpLen[i - 1][j] > dpLen[i][j - 1]) {
+                    dpLen[i][j] = dpLen[i - 1][j];
+                    dpSeq[i][j] = new Set(dpSeq[i - 1][j]);
+                } else if (dpLen[i - 1][j] < dpLen[i][j - 1]) {
+                    dpLen[i][j] = dpLen[i][j - 1];
+                    dpSeq[i][j] = new Set(dpSeq[i][j - 1]);
                 } else {
-                    matriz[i][j].valor = esquerda;
-                    matriz[i][j].direcao = 3; // esquerda
+                    dpLen[i][j] = dpLen[i - 1][j];
+                    dpSeq[i][j] = new Set([
+                        ...dpSeq[i - 1][j],
+                        ...dpSeq[i][j - 1]
+                    ]);
                 }
             }
         }
     }
 
-    return matriz;
-
+    return dpSeq[tamX][tamY]; // <- Retorna só o conjunto final
 }
 
-
-//verificar
-function gerarSubstringDaMatriz(matriz, stringX, stringY) {
-    const stack = [{
-        i: stringX.length - 1,
-        j: stringY.length - 1,
-        lcs: ''
-    }];
-
-    const resultados = new Set();
-
-    while (stack.length > 0) {
-        const { i, j, lcs } = stack.pop();
-
-        if (i < 0 || j < 0) {
-            resultados.add(lcs.split('').reverse().join(''));
-            continue;
-        }
-
-        const elemento = matriz[i][j];
-
-        if (stringX[i] === stringY[j]) {
-            // Diagonal
-            stack.push({
-                i: i - 1,
-                j: j - 1,
-                lcs: lcs + stringX[i]
-            });
-        } else {
-            const cima = i > 0 ? matriz[i - 1][j].valor : -1;
-            const esquerda = j > 0 ? matriz[i][j - 1].valor : -1;
-
-            if (i > 0 && cima >= esquerda) {
-                stack.push({
-                    i: i - 1,
-                    j: j,
-                    lcs: lcs
-                });
-            }
-
-            if (j > 0 && esquerda >= cima) {
-                stack.push({
-                    i: i,
-                    j: j - 1,
-                    lcs: lcs
-                });
-            }
-        }
-    }
-
-    return [...resultados];
-}
-
-
-//Função para pegar entradas
+//pega os dados das partes da helena
 function pegarDadosEntradaHelena() {
     const quantidade = parseInt(document.getElementById('tamanhoEntrada').value);
     const helena = [];
@@ -143,6 +71,7 @@ function pegarDadosEntradaHelena() {
     return helena;
 }
 
+//pega os dados das partes do marcus
 function pegarDadosEntradaMarcus() {
     const quantidade = parseInt(document.getElementById('tamanhoEntrada').value);
     const marcus = [];
@@ -164,7 +93,7 @@ function pegarDadosEntradaMarcus() {
     return marcus;
 }
 
-//Funções de resolução
+//controla todo o processo
 function analisarSembacktracking() {
     let helena = pegarDadosEntradaHelena();
     let marcus;
@@ -188,7 +117,7 @@ function analisarSembacktracking() {
 
             for (let count = 0; count < resposta.length; count++) {
                 if (resposta[count] != "#") {
-                    if (count === 1000) {
+                    if (count >= 1000) {
                         alert("O limite de 1000 foi atingido, as respostas acima de 1000 foram ocultadas");
                         break;
                     }
@@ -196,7 +125,7 @@ function analisarSembacktracking() {
                     item.textContent = resposta[count];
                     lista.appendChild(item);
                 }
-                else {
+                else {// atendendo ao requisito do espaço
                     const br = document.createElement('br');
                     lista.appendChild(br);
                 }
