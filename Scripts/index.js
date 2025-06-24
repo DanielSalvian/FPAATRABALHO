@@ -41,7 +41,7 @@ function gerarCampos() {
     }
 }
 
-//adicionar função do backtracking aqui
+//ação chamada ao clicar no botão de gerar substrings
 function definirAnalise() {
     const checkbox = document.getElementById('check');
     const modo = checkbox.checked;
@@ -60,7 +60,7 @@ function formatarEntrada() {
 
     if (!helena || !marcus) return null; // em caso de erro nas validações
 
-    let lines = [`${helena.length}`]; // primeira linha: número de casos
+    let lines = [`${helena.length}`]; //usa o tamanho das entradas helena como tamanho
 
     for (let i = 0; i < helena.length; i++) {
         lines.push(helena[i]);
@@ -113,9 +113,6 @@ function pegarDadosEntradaMarcus() {
     }
     return marcus;
 }
-
-
-
 
 
 const modal = document.getElementById("modalTexto");

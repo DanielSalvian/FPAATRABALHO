@@ -4,8 +4,8 @@ function gerenciarEntradas(tamanhoEntrada, helena, marcus) {
 
     for (let i = 0; i < tamanhoEntrada; i++) {
           let sequencias = avaliarMatriz(helena[i], marcus[i]);
-          let arrSequencias = Array.from(sequencias).filter(s => s !== '').sort();
-          resposta.push(...arrSequencias);
+          let arraySequencias = Array.from(sequencias).filter(s => s !== '').sort();
+          resposta.push(...arraySequencias);
           resposta.push("#");
     }
     return resposta;
@@ -52,11 +52,11 @@ function avaliarMatriz(stringX, stringY) {
 
 //controla todo o processo
 function analisarSembacktracking() {
-    let helena = pegarDadosEntradaHelena();
+    let helena = pegarDadosEntradaHelena();//prenche com todos os dados da "helena"
     let marcus;
 
     if (helena != null && helena != undefined) {
-        marcus = pegarDadosEntradaMarcus();
+        marcus = pegarDadosEntradaMarcus();//prenche com todos os dados do "marcus"
     }
 
     if (marcus != null && marcus != undefined) {
@@ -74,7 +74,7 @@ function analisarSembacktracking() {
 
             for (let count = 0; count < resposta.length; count++) {
                 if (resposta[count] != "#") {
-                    if (count >= 1000) {
+                    if (count >= 1000) {//avalia se atende ao limite das 1000 substrings de resposta
                         alert("O limite de 1000 foi atingido, as respostas acima de 1000 foram ocultadas");
                         break;
                     }
@@ -93,7 +93,6 @@ function analisarSembacktracking() {
 
         }
 
-        //console.log(resposta);
     }
 
 }

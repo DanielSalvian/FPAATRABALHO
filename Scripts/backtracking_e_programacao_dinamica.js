@@ -64,18 +64,6 @@ function coletarTodasLCS(sequencia1, sequencia2, dp) {
 
 // Função principal: lê input, processa casos e imprime resultados
 function main(lines) {
-  /*
-  const fs = require('fs');
-  // lê todas as linhas e remove vazias
-  const raw = fs.readFileSync(0, 'utf-8').split(/\r?\n/);
-  const lines = raw.filter(line => line.trim() !== '');*/
-/*
-  const lines = [
-    '1',
-    'Abab',
-    'baba',
-  ];*/
-
   const D = parseInt(lines[0], 10);
   let ptr = 1;
   const output = [];
@@ -95,17 +83,8 @@ function main(lines) {
     if (t < D - 1) output.push('');
   }
 
-  // imprime resultado final
-  //process.stdout.write(output.join('\n'));
   exibirResultadoNaTela(output.join('\n'));
 }
-
-/*
-// executa main se for chamado diretamente
-if (require.main === module) {
-  main();
-}*/
-
 
 function exibirResultadoNaTela(texto) {
   const saida = document.getElementById('resultado');
