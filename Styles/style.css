@@ -1,4 +1,10 @@
-/* Reset básico */
+/*=============================================================================
+  Arquivo: style.css
+  Descrição: Estilização da interface de toda a aplicação.
+  Autor: Yago
+  Data: Junho de 2025
+=============================================================================*/
+
 * {
     box-sizing: border-box;
     margin: 0;

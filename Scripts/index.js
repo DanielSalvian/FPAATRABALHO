@@ -1,3 +1,14 @@
+/*=============================================================================
+  Arquivo: index.js
+  Descrição: Possui as funções mais comuns e que server para gerar dados 
+             iniciais do front.
+  Autor: Yago
+  Data: Junho de 2025
+  Linguagem: JavaScript
+  Observações:
+    - Faz a validação inicial dos dados.
+=============================================================================*/
+
 //Gera elementos da interface do html
 const select = document.getElementById('tamanhoEntrada');
 for (let i = 1; i <= 10; i++) {

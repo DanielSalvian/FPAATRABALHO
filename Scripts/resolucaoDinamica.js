@@ -1,3 +1,15 @@
+/*=============================================================================
+  Arquivo: resolucaoDinamica.js
+  Descrição: Aplica programação dinâmica para encontrar
+             todas as subsequências comuns mais longas (LCS) entre pares de
+             strings inseridas pelo usuário.
+  Autor: Yago
+  Data: Junho de 2025
+  Linguagem: JavaScript
+  Observações:
+    - Utiliza abordagem dinamica para cálculo  da LCS.
+=============================================================================*/
+
 //gerencia as entradas para preparalas para o processo
 function gerenciarEntradas(tamanhoEntrada, helena, marcus) {
     let resposta = [];

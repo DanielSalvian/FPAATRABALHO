@@ -1,3 +1,15 @@
+/*=============================================================================
+  Arquivo: backtracking_e_programacao_dinamica.js
+  Descrição: Aplica programação dinâmica com backtracking para encontrar
+             todas as subsequências comuns mais longas (LCS) entre pares de
+             strings inseridas pelo usuário.
+  Autor: Daniel e Vinicius
+  Data: Junho de 2025
+  Linguagem: JavaScript
+  Observações:
+    - Utiliza abordagem dinamica com backtracking para cálculo da LCS.
+=============================================================================*/
+
 // Constroi a tabela DP com tamanhos das LCS de prefixos
 function construirTabelaDp(sequencia1, sequencia2) {
   const n = sequencia1.length;
