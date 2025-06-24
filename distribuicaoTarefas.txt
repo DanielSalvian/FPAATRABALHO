@@ -1,0 +1,4 @@
+Yago: Fez o index.html, style.css, index.js e resolucaoDinamica.js
+Daniel: Fez o README.md e backtracking_e_programacao_dinamica
+Vinicius: Fez o README.md e backtracking_e_programacao_dinamica
+Gustavo: Fez o slide e testes de execução
