@@ -1,4 +1,15 @@
-# Perguntas e problemas
+## Professora
+
+* Amália Soares Vieira de Vasconcelos
+
+## Integrantes
+
+* Yago de Arruda Simões,  
+* Daniel Vitor Salviano Araújo,
+* Gustavo Augusto Santos Perdigão,
+* Vinicius Augusto Gomes de Oliveira
+
+## Perguntas e problemas
 
 1. Como a programação dinâmica foi aplicada na solução?
 A programação dinâmica foi utilizada para calcular o comprimento da maior subsequência comum (LCS) entre duas strings. Para isso, foi construída uma matriz (dpLen) onde cada célula dpLen[i][j] armazena o tamanho da LCS entre os prefixos stringX[0...i-1] e stringY[0...j-1]. Essa matriz é preenchida de forma incremental, aproveitando soluções de subproblemas menores para construir soluções maiores. Isso evita recomputações desnecessárias e melhora o desempenho do algoritmo.
