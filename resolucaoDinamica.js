@@ -50,50 +50,6 @@ function avaliarMatriz(stringX, stringY) {
     return dpSeq[tamX][tamY]; // <- Retorna só o conjunto final
 }
 
-//pega os dados das partes da helena
-function pegarDadosEntradaHelena() {
-    const quantidade = parseInt(document.getElementById('tamanhoEntrada').value);
-    const helena = [];
-
-    const regex = /^[a-z]+$/;
-
-    for (let i = 1; i <= quantidade; i++) {
-        const campoHelena = document.getElementById(`Helena_${i}`);
-        if (!regex.test(campoHelena.value)) {
-            alert(`linha ${i} contem characteres invalidos!`);
-            return;
-        }
-        if (campoHelena.value.length < 0 || campoHelena.value.length > 80) {
-            alert(`linha ${i} tem um tamanho invalido!`);
-            return;
-        }
-        helena.push(campoHelena ? campoHelena.value : '');
-    }
-    return helena;
-}
-
-//pega os dados das partes do marcus
-function pegarDadosEntradaMarcus() {
-    const quantidade = parseInt(document.getElementById('tamanhoEntrada').value);
-    const marcus = [];
-
-    const regex = /^[a-z]+$/;
-
-    for (let i = 1; i <= quantidade; i++) {
-        const campoMarcus = document.getElementById(`Marcus_${i}`);
-        if (!regex.test(campoMarcus.value)) {
-            alert(`linha ${i} contem characteres invalidos!`);
-            return;
-        }
-        if (campoMarcus.value.length < 0 || campoMarcus.value.length > 80) {
-            alert(`linha ${i} tem um tamanho invalido!`);
-            return;
-        }
-        marcus.push(campoMarcus ? campoMarcus.value : '');
-    }
-    return marcus;
-}
-
 //controla todo o processo
 function analisarSembacktracking() {
     let helena = pegarDadosEntradaHelena();

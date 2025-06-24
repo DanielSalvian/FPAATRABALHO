@@ -63,11 +63,18 @@ function coletarTodasLCS(sequencia1, sequencia2, dp) {
 }
 
 // Função principal: lê input, processa casos e imprime resultados
-function main() {
+function main(lines) {
+  /*
   const fs = require('fs');
   // lê todas as linhas e remove vazias
   const raw = fs.readFileSync(0, 'utf-8').split(/\r?\n/);
-  const lines = raw.filter(line => line.trim() !== '');
+  const lines = raw.filter(line => line.trim() !== '');*/
+/*
+  const lines = [
+    '1',
+    'Abab',
+    'baba',
+  ];*/
 
   const D = parseInt(lines[0], 10);
   let ptr = 1;
@@ -89,10 +96,41 @@ function main() {
   }
 
   // imprime resultado final
-  process.stdout.write(output.join('\n'));
+  //process.stdout.write(output.join('\n'));
+  exibirResultadoNaTela(output.join('\n'));
 }
 
+/*
 // executa main se for chamado diretamente
 if (require.main === module) {
   main();
+}*/
+
+
+function exibirResultadoNaTela(texto) {
+  const saida = document.getElementById('resultado');
+    saida.innerHTML = ""; // limpa conteúdo anterior
+
+    const lista = document.createElement("ul");
+    const linhas = texto.split('\n');
+
+    for (let i = 0; i < linhas.length; i++) {
+        const linha = linhas[i].trim();
+
+        if (linha === "") {
+            const br = document.createElement("br");
+            lista.appendChild(br);
+        } else {
+            const item = document.createElement("li");
+            item.textContent = linha;
+            lista.appendChild(item);
+        }
+
+        if (i >= 1000) {
+            alert("O limite de 1000 foi atingido, as respostas acima de 1000 foram ocultadas");
+            break;
+        }
+    }
+
+    saida.appendChild(lista);
 }
